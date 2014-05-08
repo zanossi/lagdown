@@ -28,5 +28,8 @@ module Lagdown
 
     # auto-loading
     config.autoload_paths += Dir[Rails.root.join('lib')]
+
+
+
   end
 end
