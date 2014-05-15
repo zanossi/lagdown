@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_blog, only: %i[index show]
+  before_action :set_blog, only: %i[index show rss]
   before_action :set_post, only: %i[show]
   authorize_resource except: :preview
   layout 'blog'
@@ -27,6 +27,40 @@ class PostsController < ApplicationController
   def preview
     render text: LagdownRenderer.render(params[:text].to_s)
   end
+
+
+
+  def rss
+    require "rss"
+
+     @rss = RSS::Maker.make("2.0") do |maker|
+     maker.channel.language = "en"
+     maker.channel.author = "123"
+     maker.channel.updated = Time.now.to_s
+     maker.channel.link = "http://www.ruby-lang.org/en/feeds/news.rss"
+     maker.channel.title = "Example Feed"
+     maker.channel.description = "A longer description of my feed."
+     
+     @blog.posts.each do |p|
+
+       maker.items.new_item do |item|
+       item.link = post_url(p,:subdomain => @blog.subdomain)
+       #"http://tim.lvh.me:3000/posts/" + p.id.to_s
+       item.title = p.title
+       item.updated = p.updated_at.to_s
+
+    end
+
+     end
+    end
+
+    # respond_to do |format|
+    #   format.xml { render :xml => @rss.to_xml}
+    # end
+    render :xml => @rss.to_xml
+  end
+
+
 
   private
 

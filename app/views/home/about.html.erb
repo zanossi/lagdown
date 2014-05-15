@@ -1,0 +1,25 @@
+  <h1>tim's EBODY</h1>
+  <%=link_to image_tag("ebody.jpg",size:"300x200"),'http://www.facebook.com/tim810908'%>
+
+  <div class="container">
+  <div style= "padding:10px">
+    
+    <hr>
+       <%= notice %>
+       <%= alert %>
+       <div class="row">
+        <div class="col-sm-2"><%= "個人資料" %>
+          <%= @user.find(params[:id]) %>
+
+        </div><!--col-sm-->
+        <br>         
+         
+        <div class="col-sm-10"><%= "最近發文" %>
+
+        </div><!--col-xsm-->
+
+
+
+        </div>   
+  </div> 
+</div>

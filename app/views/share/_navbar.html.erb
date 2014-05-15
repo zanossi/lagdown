@@ -17,6 +17,8 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.email %> <b class="caret"></b></a>
           <ul class="dropdown-menu">
+            <li><%= link_to t('.about'), home_about_url %></li>
+            <li class="divider"></li>  
             <li><%= link_to t('.settings'), settings_blogs_url %></li>
             <li class="divider"></li>
             <li><%= link_to t('.sign_out'), destroy_user_session_url, method: :delete %></li>
